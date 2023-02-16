@@ -1,0 +1,48 @@
+{
+  "name": "node-native-module-template",
+  "version": "0.0.1",
+  "description": "Your description.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "BB-fat",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^5.0.0",
+    "node-gyp-build": "^4.4.0"
+  },
+  "gypfile": true,
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "jest": "^27.0.6",
+    "prebuildify": "^4.2.0"
+  },
+  "os": [
+    "darwin",
+    "win32"
+  ],
+  "types": "index.d.ts",
+  "files": [
+    "src",
+    "tools",
+    "index.js",
+    "index.d.ts",
+    "index.native.js",
+    "index.native.d.ts",
+    "index.mac.js",
+    "index.mac.d.ts",
+    "index.win.js",
+    "index.win.d.ts",
+    "prebuilds"
+  ],
+  "scripts": {
+    "test": "jest",
+    "gen-binding": "node tools/gen_binding.js",
+    "preinstall": "npm run gen-binding",
+    "install": "node-gyp-build",
+    "prebuildify": "npm run gen-binding && node build.js",
+    "xcode": "node-gyp configure -- -f xcode && open build/binding.xcodeproj",
+    "msvs": "node-gyp configure -- -f msvs"
+  }
+}
